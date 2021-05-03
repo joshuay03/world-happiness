@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Rankings from './components/Rankings';
 import Register from './components/Register';
-import Login from './components/Login';
+import Login, { Logout } from './components/Login';
 
 function App() {
   return (
@@ -35,6 +35,9 @@ function App() {
               </Route>
               <Route path="/login">
                 <Login/>
+              </Route>
+              <Route path="/logout">
+                <Logout/>
               </Route>
             </Switch>
           </div>
