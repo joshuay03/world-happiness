@@ -5,7 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       'freckle-face': ['"Freckle Face"', 'cursive'],
-      'orelega-one': ['"Orelega One"', 'cursive'],
+      'comfortaa': ['"Comfortaa"', 'cursive'],
      }
   },
   variants: {
