@@ -2,7 +2,12 @@ module.exports = {
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        'grid': '38rem',
+        'auth': '28rem',
+      }
+    },
     fontFamily: {
       'freckle-face': ['"Freckle Face"', 'cursive'],
       'comfortaa': ['"Comfortaa"', 'cursive'],

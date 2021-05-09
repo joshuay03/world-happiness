@@ -1,89 +1,80 @@
 import { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function Register() {
   const [user, setUser] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: '',
   });
   const URL = 'http://131.181.190.87:3000/user/register';
-  const [status, setStatus] = useState({
-    error: true
-  });
-  const [alert, setAlert] = useState("");
-  const register = e => {
+  const [registered, setRegistered] = useState(false);
+  const [alert, setAlert] = useState('');
+
+  const register = (e) => {
     e.preventDefault();
     fetch(URL, {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: { 'Content-Type': 'application/json'},
+      method: 'POST',
+      body: JSON.stringify(user),
+      headers: { 'Content-Type': 'application/json' },
     })
-    .then(res => res.json())
-    .then(res => {
-      if (res.error) {
-        setStatus({...status, error: res.error});
-        setAlert(res.message);
-      }
-      else {
-          setStatus({...status, error: false});
-      }
-    });
-  }  
-  if (status.error === true) {
+      .then(function(res) {
+        if (res.status === 409) {
+          setAlert('There is already a user with this email address');
+        } else if (res.status === 400) {
+          setAlert('Both email address and password are required')
+        } else {
+          setRegistered(true);
+        }
+      });
+  };
+
+  if (!registered) {
     return (
-      <div className="grid place-items-center">
+      <div className="mt-10">
         <form onSubmit={register}>
-          <div className="grid grid-rows-4 space-y-3 place-items-center -mt-52">
-              <label>{ alert }</label>
-              <label className="text-6xl">Register</label>
-              <input className="text-lg w-96 h-12 rounded-md pl-2"
-                type="text"
-                name="email"
-                value={ user.email }
-                placeholder= "Email"
-                onChange={e => setUser({ ...user, email: e.target.value })}
-              />
-              <input className="text-lg w-96 h-12 rounded-md pl-2"
-                type="text"
-                name="password"
-                value={ user.password }
-                placeholder= "Password"
-                onChange={e => setUser({ ...user, password: e.target.value })}
-              />
-              <button className="bg-blue-100 rounded-md px-5 pb-2 pt-3 text-xl mt-4" type="submit">Register</button>
+          <div className="h-auth grid grid-rows-5 place-items-center">
+            <label className="text-3xl text-red-600">{alert}</label>
+            <label className="text-6xl text-gray-200">Register</label>
+            <input
+              className="text-lg w-96 h-12 rounded-md pl-2"
+              type="text"
+              name="email"
+              value={user.email}
+              placeholder="Email"
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+            <input
+              className="text-lg w-96 h-12 rounded-md pl-2 -mt-14"
+              type="text"
+              name="password"
+              value={user.password}
+              placeholder="Password"
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
+            <button className="bg-blue-100 rounded-md px-5 pb-2 pt-3 text-xl -mt-16" type="submit">
+              Register
+            </button>
           </div>
         </form>
       </div>
     );
-  }
-  else {
-    return (
-      <Registered />
-    );
+  } else {
+    return <Registered />;
   }
 }
 
 export function Registered() {
-  const [redirect, setRedirect] = useState({
-    now: false
-  });
+  const history = useHistory();
 
   useEffect(() => {
     setTimeout(() => {
-      setRedirect({ ...redirect, now: true });
-    }, 2000)
-  })
+      history.push('/login');
+    }, 1500);
+  });
 
-  if (redirect.now) {
-    return (
-      <Redirect to="/login" />
-    );
-  }
-  else {
-    return (
-      <div className="text-3xl max-w-5xl -mt-32">
-        <label>Registration successful! Taking you to the to Login page...</label>
-      </div>
-    );
-  }
+  return (
+    <div className="grid place-items-center mt-10">
+      <label className="text-3xl text-gray-200">Registration successful! Taking you to the to Login page...</label>
+    </div>
+  );
 }

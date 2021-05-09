@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+  const loggedIn = localStorage.getItem('token') !== null;
+
   return (
-    <div className="grid grid-cols-3 w-full mt-5 bg-gray-200 rounded-lg">
+    <div className="grid grid-cols-3 w-full bg-gray-200 rounded-lg">
       <ul className="inline-flex space-x-4 list-none py-2 pl-10">
         <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
           <Link to="/rankings">Rankings</Link>
@@ -25,13 +27,41 @@ export default function Navbar() {
         <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
           <Link to="/register">Register</Link>
         </li>
-        <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
-          <Link to="/login">Login</Link>
-        </li>
-        <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
-          <Link to="/logout">Logout</Link>
-        </li>
+        <LoginButton loggedIn={loggedIn} />
+        <LogoutButton loggedIn={loggedIn} />
       </ul>
     </div>
   );
+}
+
+export function LoginButton(props) {
+  if (!props.loggedIn) {
+    return (
+      <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
+        <Link to="/login">Login</Link>
+      </li>
+    );
+  } else {
+    return (
+      <li className="text-gray-500 rounded-lg px-3 py-1">
+        Login
+      </li>
+    );
+  }
+}
+
+export function LogoutButton(props) {
+  if (!props.loggedIn) {
+    return (
+      <li className="text-gray-300 rounded-lg px-3 py-1">
+        Logout
+      </li>
+    );
+  } else {
+    return (
+      <li className="hover:bg-gray-500 rounded-lg px-3 py-1">
+        <Link to="/logout">Logout</Link>
+      </li>
+    );
+  }
 }

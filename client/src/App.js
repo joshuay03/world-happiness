@@ -2,48 +2,63 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Rankings from './components/Rankings';
+import Factors from './components/Factors';
 import Register from './components/Register';
 import Login, { Logout } from './components/Login';
+import Error from './components/Error';
 
 function App() {
   return (
-    <div className="App">
-      <div className="block w-full h-screen overflow-hidden font-comfortaa">
+    <div className="App font-comfortaa mx-10">
+      <div className="h-6" />
         <Router>
-          <div className="grid place-items-center mx-12">
-            <Navbar/>
-          </div>
-          <div className="grid place-items-center mx-12 h-full">
-            <Switch>
-              <Route path="/home">
-                <Home/>
-              </Route>
-              <Route exact path="/">
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/rankings">
-                <Rankings/>
-              </Route>
-              <Route path="/search">
-                <Rankings/>
-              </Route>
-              <Route path="/factors">
-                <Rankings/>
-              </Route>
-              <Route path="/register">
-                <Register/>
-              </Route>
-              <Route path="/login">
-                <Login/>
-              </Route>
-              <Route path="/logout">
-                <Logout/>
-              </Route>
-            </Switch>
-          </div>
+          <Switch>
+            <Route path="/home">
+              <Navbar />
+              <div className="h-6" />
+              <Home />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/rankings">
+              <Navbar />
+              <div className="h-6" />
+              <Rankings />
+            </Route>
+            <Route path="/search">
+              <Navbar />
+              <div className="h-6" />
+              <Rankings />
+            </Route>
+            <Route path="/factors">
+              <Navbar />
+              <div className="h-6" />
+              <Factors />
+            </Route>
+            <Route path="/register">
+              <Navbar />
+              <div className="h-6" />
+              <Register />
+            </Route>
+            <Route path="/login">
+              <Navbar />
+              <div className="h-6" />
+              <Login />
+            </Route>
+            <Route path="/logout">
+              <Navbar />
+              <div className="h-6" />
+              <Logout />
+            </Route>
+            <Route path="/error">
+              <Navbar />
+              <div className="h-6" />
+              <Error />
+            </Route>
+          </Switch>
         </Router>
       </div>
-    </div>
   );
 }
 
