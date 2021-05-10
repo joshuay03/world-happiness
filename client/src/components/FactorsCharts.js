@@ -1,10 +1,11 @@
 import {
-  XYPlot, HorizontalBarSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis
+  XYPlot, HorizontalBarSeries, VerticalGridLines, HorizontalGridLines, XAxis, YAxis, ChartLabel
 } from 'react-vis';
 
-function FactorsCharts(props) {
+export default function FactorsCharts(props) {
   const start = props.pageSize * props.currentPage;
   const end = start + props.pageSize;
+
   let data = props.data;
   data = data.slice(start, end);
 
@@ -41,76 +42,134 @@ function FactorsCharts(props) {
   }
 
   return (
-    <div className="grid grid-rows-3 grid-cols-2 -ml-16">
+    <div className="grid grid-rows-3 grid-cols-2 gap-4 -ml-10">
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25}}
         yType="ordinal"
         >
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Economy"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={economyData} />
       </XYPlot>
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25, right: 10}}
         yType="ordinal">
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Economy"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={familyData} />
       </XYPlot>
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25}}
         yType="ordinal">
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Family"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={healthData} />
       </XYPlot>
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25, right: 10}}
         yType="ordinal">
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Health"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={freedomData} />
       </XYPlot>
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25}}
         yType="ordinal">
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Freedom"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={generosityData} />
       </XYPlot>
       <XYPlot
         height={300}
-        width= {700}
-        margin={{left: 200}}
+        width= {690}
+        margin={{left: 220, top: 25, right: 10}}
         yType="ordinal">
-        <VerticalGridLines />
+        <VerticalGridLines style={{stroke: '#E5E7EB'}}/>
         <HorizontalGridLines />
-        <XAxis />
-        <YAxis />
+        <XAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <YAxis style={{text: {fill: '#E5E7EB'}}}/>
+        <ChartLabel 
+          text="Country vs Generosity"
+          includeMargin={false}
+          xPercent={0.28}
+          yPercent={0.06}
+          style={{
+            textAnchor: 'start',
+            fill: '#E5E7EB'
+          }}
+        />
         <HorizontalBarSeries data={trustData} />
       </XYPlot>
     </div>
   );
 }
-
-export default FactorsCharts;

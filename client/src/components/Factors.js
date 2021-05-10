@@ -4,12 +4,13 @@ import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
-import './styles/styles.scss';
+import './styles/component_styles.scss';
 import FactorsCharts from './FactorsCharts';
 
 export default function Factors() {
   const URL = 'http://131.181.190.87:3000/factors/';
-  const [currentURL, setCurrentURL] = useState(URL + '2020');
+  const [year, setYear] = useState('2020');
+  const [currentURL, setCurrentURL] = useState(URL + year);
   const columnData = [
     { headerName: 'Rank', field: 'rank', sortable: true, filter: true },
     { headerName: 'Country', field: 'country', sortable: true, filter: true },
@@ -26,7 +27,6 @@ export default function Factors() {
   const [alert, setAlert] = useState('');
   const [token] = useState(localStorage.getItem('token'));
   const [loggedIn, setLoggedIn] = useState(token !== null);
-  const [year, setYear] = useState('2020');
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(0);
   const history = useHistory();
@@ -39,7 +39,7 @@ export default function Factors() {
           Authorization: 'Bearer ' + token,
         },
       })
-        .then((res) => res.json())
+        .then(res => res.json())
         .then((res) => {
           if (res.error) {
             switch (res.message) {
@@ -62,8 +62,7 @@ export default function Factors() {
 
   const handleSelect = (e) => {
     setYear(e);
-    setCurrentURL(URL + '/' + year);
-    setAlert('You are looking at the factors for ' + year);
+    setCurrentURL(URL + e);
   };
 
   const onGridReady = (params) => {
@@ -87,6 +86,7 @@ export default function Factors() {
             <Dropdown.Item eventKey={'2020'}>2020</Dropdown.Item>
           </DropdownButton>
         </div>
+        <div className="h-2"></div>
         <div className="h-grid ag-theme-material">
           <AgGridReact
             onGridReady={onGridReady}
@@ -97,7 +97,7 @@ export default function Factors() {
             onPaginationChanged={onPaginationChanged}
           />
         </div>
-        <div className="h-6"></div>
+        <div className="h-8"></div>
         <div>
           <FactorsCharts data={rowData} pageSize={pageSize} currentPage={currentPage} />
         </div>

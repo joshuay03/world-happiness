@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Rankings from './components/Rankings';
+import Search from './components/Search'
 import Factors from './components/Factors';
 import Register from './components/Register';
 import Login, { Logout } from './components/Login';
@@ -29,7 +30,7 @@ function App() {
             <Route path="/search">
               <Navbar />
               <div className="h-6" />
-              <Rankings />
+              <Search />
             </Route>
             <Route path="/factors">
               <Navbar />

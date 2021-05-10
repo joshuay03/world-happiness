@@ -6,6 +6,9 @@ module.exports = {
       spacing: {
         'grid': '38rem',
         'auth': '28rem',
+        'slim': '1rem',
+        'button': '2.4rem',
+        'right': '30rem',
       }
     },
     fontFamily: {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 import { AgGridReact } from 'ag-grid-react';
-import './styles/styles.scss';
+import './styles/component_styles.scss';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
@@ -59,6 +59,7 @@ export default function Rankings() {
               <Dropdown.Item eventKey={'2020'}>2020</Dropdown.Item>
             </DropdownButton>
           </div>
+          <div className="h-2"></div>
           <div className="h-grid ag-theme-material">
             <AgGridReact
               onGridReady={onGridReady}
