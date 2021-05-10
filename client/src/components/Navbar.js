@@ -53,7 +53,7 @@ export function LoginButton(props) {
 export function LogoutButton(props) {
   if (!props.loggedIn) {
     return (
-      <li className="text-gray-300 rounded-lg px-3 py-1">
+      <li className="text-gray-500 rounded-lg px-3 py-1">
         Logout
       </li>
     );
