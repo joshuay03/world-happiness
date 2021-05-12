@@ -8,7 +8,6 @@ export default function Login() {
   });
   const URL = 'http://131.181.190.87:3000/user/login';
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [redirect, setRedirect] = useState(false);
   const [alert, setAlert] = useState('');
 
   const login = (e) => {
@@ -28,7 +27,6 @@ export default function Login() {
             .then((obj) => {
               localStorage.setItem('token', obj.token);
               setToken(obj.token);
-              setRedirect(true);
             });
         }
       });
@@ -65,15 +63,7 @@ export default function Login() {
       </div>
     );
   } else {
-    if (!redirect) {
-      return (
-        <div className="grid place-items-center mt-16">
-          <label className="text-3xl text-gray-200">Already logged in!</label>
-        </div>
-      );
-    } else {
-      return <LoggedIn />;
-    }
+    return <LoggedIn />;
   }
 }
 
@@ -83,7 +73,7 @@ export function LoggedIn() {
   useEffect(() => {
     setTimeout(() => {
       history.goBack();
-    }, 1500);
+    }, 1000);
   });
 
   return (
@@ -103,7 +93,7 @@ export function Logout() {
 
     setTimeout(() => {
       history.goBack();
-    }, 1500);
+    }, 1000);
   });
 
   return (

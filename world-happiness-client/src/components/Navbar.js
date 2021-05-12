@@ -8,8 +8,8 @@ export default function Navbar() {
     <div className="grid grid-cols-3 w-full bg-gray-200 rounded-lg">
       <ul className="inline-flex space-x-4 list-none py-2 pl-10">
         <RankingsButton currentURL={currentURL} />
-        <SearchButton currentURL={currentURL} />
         <FactorsButton currentURL={currentURL} />
+        <SearchButton currentURL={currentURL} />
       </ul>
       <div className="grid place-items-center w-full h-full">
         <ul className="list-none py-2">
@@ -41,22 +41,6 @@ export function RankingsButton(props) {
   }
 }
 
-export function SearchButton(props) {
-  if (props.currentURL === '/search') {
-    return (
-      <li className="bg-gray-300 rounded-lg px-3 py-1">
-        <Link to="/search">Search</Link>
-      </li>
-    );
-  } else {
-    return (
-      <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
-        <Link to="/search">Search</Link>
-      </li>
-    );
-  }
-}
-
 export function FactorsButton(props) {
   if (props.currentURL === '/factors') {
     return (
@@ -68,6 +52,22 @@ export function FactorsButton(props) {
     return (
       <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
         <Link to="/factors">Factors</Link>
+      </li>
+    );
+  }
+}
+
+export function SearchButton(props) {
+  if (props.currentURL === '/search') {
+    return (
+      <li className="bg-gray-300 rounded-lg px-3 py-1">
+        <Link to="/search">Search</Link>
+      </li>
+    );
+  } else {
+    return (
+      <li className="hover:bg-gray-300 rounded-lg px-3 py-1">
+        <Link to="/search">Search</Link>
       </li>
     );
   }
