@@ -10,11 +10,10 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 
 export default function Search() {
   const countriesURL = 'http://131.181.190.87:3000/countries';
-  const URL = 'http://131.181.190.87:3000/rankings';
-  const [country, setCountry] = useState([]);
-  const [validCountry, setValidCountry] = useState(false);
-  const [currentURL, setCurrentURL] = useState(URL);
+  const [year, setYear] = useState('All Years');
+  const [country, setCountry] = useState('');
   const [countriesList, setCountriesList] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState([]);
   const columnData = [
     { headerName: 'Rank', field: 'rank', sortable: true, filter: true },
     { headerName: 'Country', field: 'country', sortable: true, filter: true },
@@ -25,45 +24,37 @@ export default function Search() {
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(0);
   const [alert, setAlert] = useState(null);
-  const [year, setYear] = useState('All Years');
   const [error, setError] = useState(false);
 
+  if (countriesList.length === 0) {
+    fetch(countriesURL)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.error) {
+        setError(true);
+      } else {
+        setCountriesList(res);
+      }
+    });
+  }
+
   useEffect(() => {
-    if (countriesList.length === 0) {
-      fetch(countriesURL)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.error) {
-            setError(true);
-          } else {
-            setCountriesList(res);
-            countriesList.map(item => item.toLowerCase())
-          }
-        });
-    }
-
+    let tempYear = '';
     if (year !== 'All Years') {
-      setCurrentURL(URL + '?year=' + year);
-      if (validCountry) {
-        setCurrentURL(currentURL + '?country=' + country[0].toLowerCase());
-      }
-    } else {
-      setCurrentURL(URL);
-      if (validCountry) {
-        setCurrentURL(currentURL + '?country=' + country[0].toLowerCase());
-      }
+      tempYear = year;
     }
+    let URL = 'http://131.181.190.87:3000/rankings?year=' + tempYear + '&country=' + country;
 
-    fetch(currentURL)
+    fetch(URL)
       .then(res => res.json())
       .then((res) => {
         if (res.error) {
-          console.log(currentURL);
+          setError(true);
         } else {
           setRowData(res);
         }
       });
-  }, [country, currentURL, validCountry, year, countriesList]);
+  }, [year, country]);
 
   const handleSelect = (e) => {
     setYear(e);
@@ -71,11 +62,11 @@ export default function Search() {
 
   const selectCountry = (e) => {
     e.preventDefault();
-    if (countriesList.includes(country[0])) {
-      setValidCountry(true);
+    if (countriesList.includes(selectedCountry[0])) {
+      setCountry(selectedCountry[0]);
     } else {
       setAlert('Please select a valid country');
-      setValidCountry(false);
+      setCountry('');
     }
   }
 
@@ -106,14 +97,14 @@ export default function Search() {
               className="w-72"
               id="country-typeahead"
               labelKey="country"
-              onChange={setCountry}
+              onChange={setSelectedCountry}
               options={countriesList}
               placeholder="Choose a country..."
-              selected={country}
+              selected={selectedCountry}
             />
             <div className="w-2"></div>
-            <button className="bg-blue-100 h-button rounded px-3 text-base" type="submit">
-              Search
+            <button className="bg-blue-100 h-button rounded w-56 text-base" type="submit">
+              Search Country
             </button>
             <div className="w-right"></div>
             <label className="text-2xl text-red-600">{alert}</label>

@@ -8,7 +8,7 @@ module.exports = {
         'auth': '28rem',
         'slim': '1rem',
         'button': '2.4rem',
-        'right': '30rem',
+        'right': '21rem',
       }
     },
     fontFamily: {

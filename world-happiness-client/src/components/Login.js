@@ -82,13 +82,13 @@ export function LoggedIn() {
 
   useEffect(() => {
     setTimeout(() => {
-      history.push('/home')
+      history.goBack();
     }, 1500);
   });
 
   return (
     <div className="grid place-items-center mt-16">
-      <label className="text-3xl text-gray-200">Login successful! Taking you to the to Home page...</label>
+      <label className="text-3xl text-gray-200">Login successful! Taking you back...</label>
     </div>
   );
 }
@@ -102,7 +102,7 @@ export function Logout() {
     }
 
     setTimeout(() => {
-      history.push('/home')
+      history.goBack();
     }, 1500);
   });
 
