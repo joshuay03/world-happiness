@@ -1,3 +1,3 @@
 # world-happiness
 
-API Test Suite: github.com/joshuay03/happinessapi-tests
+API Test Suite: [github.com/joshuay03/happinessapi-tests]
